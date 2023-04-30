@@ -2,12 +2,10 @@
 :set relativenumber
 :set autoindent
 :set tabstop=4
-:set shiftwidth=4
+set shiftwidth=4
 :set smarttab
 :set softtabstop=4
 :set mouse=a
-
-call plug#begin('~/.config/nvim/plugged')
 
 " Remove newbie crutches in Command Mode
 cnoremap <Down> <Nop>
@@ -33,6 +31,9 @@ vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
 
+call plug#begin('~/.config/nvim/plugged')
+Plug 'https://github.com/voldikss/vim-floaterm' "floatterm
+Plug 'https://github.com/NLKNguyen/papercolor-theme' "Colorscheme
 Plug 'https://github.com/preservim/nerdtree' " NerdTree
 Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/cohama/lexima.vim' "For auto brackets
@@ -48,16 +49,25 @@ set encoding=UTF-8
 
 call plug#end()
 
-nnoremap <C-f> :NERDTreeFocus<CR>
+"NERDTree KeyMaps
+nnoremap <C-d> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+noremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
+
+"Telescope KeyMaps
+nnoremap <C-f> :Telescope find_files<CR>
+
+"Floatterm Keymaps
+autocmd VimEnter * FloatermNew
+autocmd VimEnter * FloatermToggle!
+nnoremap <F3> :FloatermToggle!<CR>
+
+set background=light
+colorscheme PaperColor
 
 nmap <F8> :TagbarToggle<CR>
 :set completeopt-=preview " For No Previews
 
-:colorscheme gruvbox
-
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-
 
